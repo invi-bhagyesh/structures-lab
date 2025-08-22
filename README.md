@@ -1,3 +1,3 @@
 # Structures Lab
 
-Problembs for various labs at schol
+To keep track of all programming topics for various labs at school
