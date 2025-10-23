@@ -1,219 +1,89 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Define a structure for tree nodes
 typedef struct Node {
     int data;
-    struct Node* left;
-    struct Node* right;
+    struct Node *left, *right;
 } Node;
 
-// Stack structure for iterative traversals
-#define MAX 100
-typedef struct Stack {
-    Node* data[MAX];
-    int top;
-} Stack;
-
-void initStack(Stack* s) { s->top = -1; }
-int isEmpty(Stack* s) { return s->top == -1; }
-void push(Stack* s, Node* node) { s->data[++(s->top)] = node; }
-Node* pop(Stack* s) { return s->data[(s->top)--]; }
-Node* peek(Stack* s) { return s->data[s->top]; }
-
-// Queue structure for BFS operations (parent, depth)
-typedef struct Queue {
-    Node* data[MAX];
-    int front, rear;
-} Queue;
-
-void initQueue(Queue* q) { q->front = q->rear = -1; }
-int isQEmpty(Queue* q) { return q->front == q->rear; }
-void enqueue(Queue* q, Node* node) { q->data[++(q->rear)] = node; }
-Node* dequeue(Queue* q) { return q->data[++(q->front)]; }
-
-// Create a new node
-Node* createNode(int data) {
-    Node* newNode = (Node*)malloc(sizeof(Node));
-    newNode->data = data;
-    newNode->left = newNode->right = NULL;
-    return newNode;
+// Recursive create, used for input-driven construction
+Node* create() {
+    int x;
+    scanf("%d", &x);
+    if (x == -1) return NULL;
+    Node *node = (Node*)malloc(sizeof(Node));
+    node->data = x;
+    node->left = create();   // left child
+    node->right = create();  // right child
+    return node;
 }
 
-// Insert node in binary tree (level order for balanced structure)
-void insert(Node** root, int data) {
-    Node* newNode = createNode(data);
-    if (!*root) { *root = newNode; return; }
-    Queue q; initQueue(&q);
-    enqueue(&q, *root);
-    while (!isQEmpty(&q)) {
-        Node* temp = dequeue(&q);
-        if (!temp->left) { temp->left = newNode; return; }
-        else enqueue(&q, temp->left);
-        if (!temp->right) { temp->right = newNode; return; }
-        else enqueue(&q, temp->right);
-    }
-}
-
-// 1. Iterative Inorder Traversal
-void inorderIterative(Node* root) {
-    Stack s; initStack(&s);
-    Node* curr = root;
-    while (curr || !isEmpty(&s)) {
-        while (curr) {
-            push(&s, curr);
-            curr = curr->left;
-        }
-        curr = pop(&s);
+// Iterative traversals and utilities, as before
+void inorder_iter(Node *root) {
+    Node *stack[100]; int top = -1; Node *curr = root;
+    while (curr || top != -1) {
+        while (curr) stack[++top] = curr, curr = curr->left;
+        curr = stack[top--];
         printf("%d ", curr->data);
         curr = curr->right;
     }
-    printf("\n");
 }
-
-// 2. Iterative Postorder Traversal
-void postorderIterative(Node* root) {
-    Stack s1, s2;
-    initStack(&s1); initStack(&s2);
-    if (root) push(&s1, root);
-    while (!isEmpty(&s1)) {
-        Node* curr = pop(&s1);
-        push(&s2, curr);
-        if (curr->left) push(&s1, curr->left);
-        if (curr->right) push(&s1, curr->right);
+void preorder_iter(Node *root) {
+    Node *stack[100]; int top = -1; if (root) stack[++top] = root;
+    while (top != -1) {
+        Node *curr = stack[top--]; printf("%d ", curr->data);
+        if (curr->right) stack[++top] = curr->right;
+        if (curr->left) stack[++top] = curr->left;
     }
-    while (!isEmpty(&s2)) {
-        printf("%d ", pop(&s2)->data);
-    }
-    printf("\n");
 }
-
-// 3. Iterative Preorder Traversal
-void preorderIterative(Node* root) {
-    Stack s; initStack(&s);
-    if (root) push(&s, root);
-    while (!isEmpty(&s)) {
-        Node* curr = pop(&s);
-        printf("%d ", curr->data);
-        if (curr->right) push(&s, curr->right);
-        if (curr->left) push(&s, curr->left);
+void postorder_iter(Node *root) {
+    Node *stack1[100], *stack2[100]; int top1 = -1, top2 = -1;
+    if (root) stack1[++top1] = root;
+    while (top1 != -1) {
+        Node *curr = stack1[top1--];
+        stack2[++top2] = curr;
+        if (curr->left) stack1[++top1] = curr->left;
+        if (curr->right) stack1[++top1] = curr->right;
     }
-    printf("\n");
+    while (top2 != -1) printf("%d ", stack2[top2--]->data);
 }
-
-// 4. Print Parent of a Given Element
-void printParent(Node* root, int key) {
-    if (!root || root->data == key) {
-        printf("No parent (root or not found)\n");
-        return;
-    }
-    Queue q; initQueue(&q);
-    enqueue(&q, root);
-    while (!isQEmpty(&q)) {
-        Node* curr = dequeue(&q);
-        if (curr->left && curr->left->data == key) {
-            printf("Parent of %d is %d\n", key, curr->data);
-            return;
-        }
-        if (curr->right && curr->right->data == key) {
-            printf("Parent of %d is %d\n", key, curr->data);
-            return;
-        }
-        if (curr->left) enqueue(&q, curr->left);
-        if (curr->right) enqueue(&q, curr->right);
-    }
-    printf("Element %d not found (or is root)\n", key);
+void print_parent(Node *root, int key) {
+    if (!root) return;
+    if ((root->left && root->left->data == key) || (root->right && root->right->data == key))
+        printf("%d\n", root->data);
+    print_parent(root->left, key);
+    print_parent(root->right, key);
 }
-
-// 5. Print Depth (Height) of the Tree (level order)
-int treeDepth(Node* root) {
+int height(Node *root) {
     if (!root) return 0;
-    Queue q; initQueue(&q);
-    enqueue(&q, root);
-    int height = 0;
-    while (1) {
-        int nodeCount = q.rear - q.front;
-        if (nodeCount == 0)
-            break;
-        height++;
-        while (nodeCount > 0) {
-            Node* node = dequeue(&q);
-            if (node->left) enqueue(&q, node->left);
-            if (node->right) enqueue(&q, node->right);
-            nodeCount--;
-        }
-    }
-    return height;
+    int lh = height(root->left), rh = height(root->right);
+    return (lh > rh ? lh : rh) + 1;
 }
-
-// 6. Print Ancestors of a Given Element (iterative backtracking)
-void printAncestors(Node* root, int key) {
-    Stack s; initStack(&s);
-    Node* curr = root;
-    Node* prev = NULL;
-    while (1) {
-        while (curr && curr->data != key) {
-            push(&s, curr);
-            curr = curr->left;
-        }
-        if (curr && curr->data == key) break;
-        if (isEmpty(&s)) {
-            printf("Element %d not found\n", key);
-            return;
-        }
-        curr = peek(&s);
-        if (!curr->right || curr->right == prev) {
-            prev = pop(&s);
-            curr = NULL;
-        } else {
-            curr = curr->right;
-        }
-    }
-    printf("Ancestors of %d: ", key);
-    for (int i = 0; i <= s.top; i++)
-        printf("%d ", s.data[i]->data);
-    printf("\n");
-}
-
-// 7. Count Number of Leaf Nodes (iterative)
-int countLeafNodes(Node* root) {
+int print_ancestors(Node *root, int key) {
     if (!root) return 0;
-    Stack s; initStack(&s); int count = 0;
-    push(&s, root);
-    while (!isEmpty(&s)) {
-        Node* curr = pop(&s);
-        if (!curr->left && !curr->right)
-            count++;
-        if (curr->right) push(&s, curr->right);
-        if (curr->left) push(&s, curr->left);
+    if ((root->left && root->left->data == key) || (root->right && root->right->data == key)
+       || print_ancestors(root->left, key) || print_ancestors(root->right, key)) {
+        printf("%d ", root->data);
+        return 1;
     }
-    return count;
+    return 0;
+}
+int count_leaves(Node *root) {
+    if (!root) return 0;
+    if (!root->left && !root->right) return 1;
+    return count_leaves(root->left) + count_leaves(root->right);
 }
 
-// Example usage
 int main() {
-    Node* root = NULL;
-    insert(&root, 1);
-    insert(&root, 2);
-    insert(&root, 3);
-    insert(&root, 4);
-    insert(&root, 5);
-    insert(&root, 6);
-    insert(&root, 7);
-
-    printf("Inorder: ");   inorderIterative(root);
-    printf("Postorder: "); postorderIterative(root);
-    printf("Preorder: ");  preorderIterative(root);
-
-    printParent(root, 5);
-    printParent(root, 1);
-
-    printf("Tree height: %d\n", treeDepth(root));
-
-    printAncestors(root, 7);
-    printAncestors(root, 1);
-
-    printf("Number of leaf nodes: %d\n", countLeafNodes(root));
-
+    printf("Enter tree in pre-order (-1 for NULL): ");
+    Node *root = create();
+    printf("Inorder: "); inorder_iter(root); printf("\n");
+    printf("Preorder: "); preorder_iter(root); printf("\n");
+    printf("Postorder: "); postorder_iter(root); printf("\n");
+    printf("Height: %d\n", height(root));
+    printf("Leaf count: %d\n", count_leaves(root));
+    int x;
+    printf("Parent of (input): "); scanf("%d", &x); print_parent(root, x);
+    printf("Ancestors of (input): "); scanf("%d", &x); print_ancestors(root, x); printf("\n");
     return 0;
 }
