@@ -1,0 +1,137 @@
+maths1@dscalab-03:~/Desktop$ mkdir Bhagyesh_Kumar_240957252
+maths1@dscalab-03:~/Desktop$ cd Bhagyesh_Kumar_240957252
+maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252$ mkdir Lab_1
+maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252$ cd Lab_1
+maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ touch Lab_1.txt
+maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ cat Lab_1.txt
+Preprint
+NARROW F INETUNING L EAVES C LEARLY R EADABLE
+T RACES IN ACTIVATION D IFFERENCES
+Julian Minder , ,* Clément Dumas ,
+Stewart Slocum
+Cameron Holmes
+Robert West
+Neel Nanda
+Helena Casademunt ,
+EPFL
+Ecole Normale Supérieure Paris-Saclay, Université Paris-Saclay
+Anthropic Fellows Program
+Harvard University
+MATS
+maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ head Lab_1.txt
+Preprint
+NARROW F INETUNING L EAVES C LEARLY R EADABLE
+T RACES IN ACTIVATION D IFFERENCES
+Julian Minder , ,* Clément Dumas ,
+Stewart Slocum
+Cameron Holmes
+Robert West
+Neel Nanda
+Helena Casademunt ,
+EPFL
+maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ tail Lab_1.txt
+Stewart Slocum
+Cameron Holmes
+Robert West
+Neel Nanda
+Helena Casademunt ,
+EPFL
+Ecole Normale Supérieure Paris-Saclay, Université Paris-Saclay
+Anthropic Fellows Program
+Harvard University
+MATS
+maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ 
+maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ touch txt2.txt
+maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ cp Lab_1.txt txt2.txt
+maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ ls
+Lab_1.txt  txt2.txt
+maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ cat txt2.txt
+Preprint
+NARROW F INETUNING L EAVES C LEARLY R EADABLE
+T RACES IN ACTIVATION D IFFERENCES
+Julian Minder , ,* Clément Dumas ,
+Stewart Slocum
+Cameron Holmes
+Robert West
+Neel Nanda
+Helena Casademunt ,
+EPFL
+Ecole Normale Supérieure Paris-Saclay, Université Paris-Saclay
+Anthropic Fellows Program
+Harvard University
+MATS
+maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ rm rf txt2.txt
+rm: cannot remove 'rf': No such file or directory
+maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ rm -rf txt2.txt
+maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ ls
+Lab_1.txt
+maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ cat -n Lab_1.txt
+     1	maths1@dscalab-03:~/Desktop$ mkdir Bhagyesh_Kumar_240957252
+     2	maths1@dscalab-03:~/Desktop$ cd Bhagyesh_Kumar_240957252
+     3	maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252$ mkdir Lab_1
+     4	maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252$ cd Lab_1
+     5	maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ touch Lab_1.txt
+     6	maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ cat Lab_1.txt
+     7	Preprint
+     8	NARROW F INETUNING L EAVES C LEARLY R EADABLE
+     9	T RACES IN ACTIVATION D IFFERENCES
+    10	Julian Minder , ,* Clément Dumas ,
+    11	Stewart Slocum
+    12	Cameron Holmes
+    13	Robert West
+    14	Neel Nanda
+    15	Helena Casademunt ,
+    16	EPFL
+    17	Ecole Normale Supérieure Paris-Saclay, Université Paris-Saclay
+    18	Anthropic Fellows Program
+    19	Harvard University
+    20	MATS
+    21	maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ head Lab_1.txt
+    22	Preprint
+    23	NARROW F INETUNING L EAVES C LEARLY R EADABLE
+    24	T RACES IN ACTIVATION D IFFERENCES
+    25	Julian Minder , ,* Clément Dumas ,
+    26	Stewart Slocum
+    27	Cameron Holmes
+    28	Robert West
+    29	Neel Nanda
+    30	Helena Casademunt ,
+    31	EPFL
+    32	maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ tail Lab_1.txt
+    33	Stewart Slocum
+    34	Cameron Holmes
+    35	Robert West
+    36	Neel Nanda
+    37	Helena Casademunt ,
+    38	EPFL
+    39	Ecole Normale Supérieure Paris-Saclay, Université Paris-Saclay
+    40	Anthropic Fellows Program
+    41	Harvard University
+    42	MATS
+    43	maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ 
+    44	maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ touch txt2.txt
+    45	maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ cp Lab_1.txt txt2.txt
+    46	maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ ls
+    47	Lab_1.txt  txt2.txt
+    48	maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ cat txt2.txt
+    49	Preprint
+    50	NARROW F INETUNING L EAVES C LEARLY R EADABLE
+    51	T RACES IN ACTIVATION D IFFERENCES
+    52	Julian Minder , ,* Clément Dumas ,
+    53	Stewart Slocum
+    54	Cameron Holmes
+    55	Robert West
+    56	Neel Nanda
+    57	Helena Casademunt ,
+    58	EPFL
+    59	Ecole Normale Supérieure Paris-Saclay, Université Paris-Saclay
+    60	Anthropic Fellows Program
+    61	Harvard University
+    62	MATS
+    63	maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ rm rf txt2.txt
+    64	rm: cannot remove 'rf': No such file or directory
+    65	maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ rm -rf txt2.txt
+    66	maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ ls
+    67	Lab_1.txt
+    68	
+maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_1$ 
