@@ -1,0 +1,38 @@
+maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_4$ date && echo 240957252
+Friday 30 January 2026 10:37:16 AM IST
+240957252
+maths1@dscalab-03:~/Desktop/Bhagyesh_Kumar_240957252/Lab_4$ gcc Q1.c -o Q1 && ./Q1
+
+gcc Q2.c -o Q2 && ./Q1 & ./Q2
+
+gcc Q3.c -o Q3 && ./Q3 & sleep 2 && ps aux | grep defunct && kill %1
+
+gcc -pthread Q4.c -o Q4 && ./Q4 5 64 34 25 12 22
+
+gcc -pthread Q5.c -o Q5 && ./Q5 10
+
+echo "ALL LAB EXERCISES COMPLETED SUCCESSFULLY"
+Parent: PID=13649, Child PID=13651
+Child: PID=13651, PPID=13649
+Parent: Child completed
+[1] 13660
+Parent: PID=13663, Child PID=13664
+Child: PID=13664, PPID=13663
+Parent: PID=13669, Child PID=13670
+Child: PID=13670, PPID=13669
+Parent: Child completed
+Parent: exec child completed
+[2] 13671
+Parent: Child completed
+Parent sleeping...
+Child PID=13679 exiting
+[1]-  Done                    gcc Q2.c -o Q2 && ./Q1
+maths1     13679  0.0  0.0      0     0 pts/1    Z    10:37   0:00 [Q3] <defunct>
+maths1     13681  0.0  0.0   9076  2360 pts/1    S+   10:37   0:00 grep --color=auto defunct
+bash: kill: %1: no such job
+Original: 64 34 25 12 22 
+Bubble sort: 0.000 sec
+Selection sort: 0.000 sec
+Final sorted: 12 22 25 34 64 
+Fibonacci: 0 1 1 2 3 5 8 13 21 34 
+ALL LAB EXERCISES COMPLETED SUCCESSFULLY
